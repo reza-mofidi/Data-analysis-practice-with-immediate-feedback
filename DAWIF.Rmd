@@ -1,0 +1,85 @@
+---
+title: "major college admissions analysis"
+author: "R Mofidi"
+date: "19/06/2020"
+output:
+  word_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## MAJOR COLLEGE ADMISSIONS ANALYSIS
+
+The aim of this assignment is to study how income varies across college major categories. Specifically answer: “Is there an association between college major category and income?”
+
+To get started, start a new R/RStudio session with a clean workspace. To do this in R, you can use the q() function to quit, then reopen R. The easiest way to do this in RStudio is to quit RStudio entirely and reopen it. After you have started a new session, run the following commands. This will load a data.frame called college for you to work with:
+
+```{r}
+install.packages("devtools")
+devtools::install_github("jhudsl/collegeIncome")
+library(collegeIncome)
+data(college)
+```
+
+Next download and install the matahari R package with the following commands:
+
+```{r}
+devtools::install_github("jhudsl/matahari")
+library(matahari)
+```
+
+This package allows a record of your analysis (your R command history) to be documented. You will be uploading a file containing this record to GitHub and submitting the link as part of this quiz. Before you start the analysis for this assignment, enter the following command to begin the documentation of your analysis:
+
+```{r}
+dance_start(value = FALSE, contents = FALSE)
+```
+
+You can then proceed with the rest of your analysis in R as usual. When you have finished your analysis, use the following command to save the record of your analysis on your desktop:
+```{r}
+dance_save("~/Desktop/college_major_analysis.rds")
+````
+
+Please upload this college_major_analysis.rds file to a public GitHub repository. In 
+question 4 of this quiz, you will share the link to this file.
+
+### Code book
+
+The following code book describes the variables in the "college_major_analysis.rds"
+dataset: 
+
+```{r examine the dataset}
+head(college)
+summary(college)
+
+```
+
+The first column pertaining to majors is major codes and I have ignored this the second colum is major (or name of the majors). There are 173 different university Majors in this category. I have not used this as the independent variable either. I have used major category in order to develop the univariate regression analyisis. I have enclosed a no simple histogram of median incomes of graduates in order to illustrate the distribution of graduate incomes. 
+
+```{r}
+hist(college$median, xlab="Median income ($)")
+```
+
+
+### Minimal preprocessing 
+````{r}
+## make sure median is a numeric variable and major category is a factor 
+Median_income<- as.numeric(college$median)
+Major_cat<- as.factor(college$major_category)
+##perform univariate analysis
+fit<- lm(Median_income~Major_cat)
+summary(fit)
+```
+
+## Including Plots
+
+In order to visualise the difference. I have drawn a no frills box plot comparing these 14 categories of majors
+
+```{r  echo=FALSE}
+boxplot(college$median ~ college$major_category)
+```
+
+## Conclusions 
+Overall there appears to be no association between the category of major and median income levels. This is a simplified assessment (adjusted R squared=0.01995). It is possible to analyse 
