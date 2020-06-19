@@ -82,4 +82,4 @@ boxplot(college$median ~ college$major_category)
 ```
 
 ## Conclusions 
-Overall there appears to be no association between the category of major and median income levels. This is a simplified assessment (adjusted R squared=0.01995). It is possible to analyse 
+Overall there appears to be no association between the category of major and median income levels. This is a simplified assessment (adjusted R squared=0.01995). There are some pertinent datasets which have not been used such as the percentage of different types of jobs(low income jobs, college jobs and non-college jobs) and percentage unemployed as well as the percentage of women taking that major category which may be effected by gender paygap. so multivariable analysis may result in a different result. But it cant be completed in 15 minutes.
